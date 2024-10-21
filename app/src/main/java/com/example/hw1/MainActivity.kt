@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.hw1.zoo.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +17,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val zooStore = ZooStore()
+        val husky = Husky(weight = 25.0, age = 4)
+        val corgi = Corgi(weight = 10.1, age = 5)
+
+
+        println(zooStore.identifyAnimal(husky))
+        println(zooStore.identifyAnimal(corgi))
     }
 }
