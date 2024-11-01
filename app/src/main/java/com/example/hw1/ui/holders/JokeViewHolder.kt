@@ -7,8 +7,20 @@ import com.example.hw1.databinding.ItemJokeBinding
 class JokeViewHolder(private val binding: ItemJokeBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(joke: Joke) {
-        binding.tvCategory.text = joke.category
-        binding.tvQuestion.text = joke.question
-        binding.tvAnswer.text = joke.answer
+        bindCategory(joke.category)
+        bindQuestion(joke.question)
+        bindAnswer(joke.answer)
+    }
+
+    fun bindCategory(category: String){
+        binding.tvCategory.text = category
+    }
+
+    fun bindQuestion(question: String){
+        binding.tvQuestion.text = question
+    }
+
+    fun bindAnswer(answer: String){
+        binding.tvAnswer.text = answer
     }
 }

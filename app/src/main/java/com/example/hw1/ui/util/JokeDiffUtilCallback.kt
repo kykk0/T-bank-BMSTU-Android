@@ -19,4 +19,27 @@ class JokeDiffUtilCallback(
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition] == newList[newItemPosition]
     }
+
+    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): List<Any>? {
+        val oldItem = oldList[oldItemPosition]
+        val newItem = newList[newItemPosition]
+
+        val payloads = mutableListOf<Any>()
+        if (oldItem.category != newItem.category) {
+            payloads.add(JokeCategoryPayload(newItem.category))
+        }
+        if (oldItem.question != newItem.question) {
+            payloads.add(JokeQuestionPayload(newItem.question))
+        }
+        if (oldItem.answer != newItem.answer) {
+            payloads.add(JokeAnswerPayload(newItem.answer))
+        }
+
+        return if (payloads.isEmpty()) null else payloads
+    }
+
+
+    data class JokeCategoryPayload(val category: String)
+    data class JokeQuestionPayload(val question: String)
+    data class JokeAnswerPayload(val answer: String)
 }

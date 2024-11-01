@@ -8,13 +8,15 @@ import com.example.hw1.data.Joke
 import com.example.hw1.databinding.ItemJokeBinding
 import com.example.hw1.ui.holders.JokeViewHolder
 import com.example.hw1.ui.util.JokeDiffUtilCallback
+import com.example.hw1.ui.util.JokeDiffUtilCallback.*
 
-class JokeAdapter(private var jokes: List<Joke>) : RecyclerView.Adapter<JokeViewHolder>() {
+class JokeAdapter : RecyclerView.Adapter<JokeViewHolder>() {
 
-    fun updateJokes(newJokes: List<Joke>) {
+    private var jokes = emptyList<Joke>()
+
+    fun setNewJokes(newJokes: List<Joke>) {
         val diffCallback = JokeDiffUtilCallback(jokes, newJokes)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-
         jokes = newJokes
         diffResult.dispatchUpdatesTo(this)
     }
@@ -26,6 +28,24 @@ class JokeAdapter(private var jokes: List<Joke>) : RecyclerView.Adapter<JokeView
 
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
         holder.bind(jokes[position])
+    }
+
+    override fun onBindViewHolder(
+        holder: JokeViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            holder.bind(jokes[position])
+        } else {
+            payloads.forEach() {
+                when (it) {
+                    is JokeCategoryPayload -> holder.bindCategory(it.category)
+                    is JokeQuestionPayload -> holder.bindQuestion(it.question)
+                    is JokeAnswerPayload -> holder.bindAnswer(it.answer)
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int = jokes.size
