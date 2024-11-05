@@ -10,7 +10,9 @@ import com.example.hw1.ui.holders.JokeViewHolder
 import com.example.hw1.ui.util.JokeDiffUtilCallback
 import com.example.hw1.ui.util.JokeDiffUtilCallback.*
 
-class JokeAdapter : RecyclerView.Adapter<JokeViewHolder>() {
+class JokeAdapter(
+    private val clickListener: (Int) -> Unit,
+) : RecyclerView.Adapter<JokeViewHolder>() {
 
     private var jokes = emptyList<Joke>()
 
@@ -23,7 +25,11 @@ class JokeAdapter : RecyclerView.Adapter<JokeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
         val binding = ItemJokeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return JokeViewHolder(binding)
+        return JokeViewHolder(binding).apply {
+            binding.root.setOnClickListener {
+                handleJokeClick(adapterPosition)
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
@@ -49,4 +55,12 @@ class JokeAdapter : RecyclerView.Adapter<JokeViewHolder>() {
     }
 
     override fun getItemCount(): Int = jokes.size
+
+    private fun handleJokeClick(position: Int) {
+        if (position != RecyclerView.NO_POSITION) {
+            (jokes[position] as? Joke)?.let {
+                clickListener(position)
+            }
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.hw1.data
 
-class JokeGenerator {
-    private val jokes = listOf(
+object JokeGenerator {
+    val jokes = listOf(
         Joke(1, "Пиратство", "Что ищут шепелявые пираты?", "Фундук"),
         Joke(2, "Дуэль", "Как называется дуэль двух каннибалов?", "Поединок"),
         Joke(3, "Язык", "Какой уровень владения английского у террористов?", "С4"),
@@ -23,7 +23,7 @@ class JokeGenerator {
         )
     )
 
-    fun getRandomJokes(): List<Joke> {
-        return jokes.shuffled()
+    fun getJokeList(): List<Joke> {
+        return jokes
     }
 }

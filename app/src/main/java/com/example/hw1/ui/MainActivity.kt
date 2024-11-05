@@ -11,7 +11,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private var jokeAdapter = JokeAdapter()
+    private val jokeGenerator = JokeGenerator
+    private val jokeAdapter = JokeAdapter{
+        startActivity(JokeDetailsActivity.getInstance(this, it))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val jokeGenerator = JokeGenerator()
-        val jokes = jokeGenerator.getRandomJokes()
+        val jokes = jokeGenerator.getJokeList()
         jokeAdapter.setNewJokes(jokes)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
