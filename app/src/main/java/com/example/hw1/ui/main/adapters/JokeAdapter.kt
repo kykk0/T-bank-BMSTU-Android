@@ -1,14 +1,14 @@
-package com.example.hw1.ui.adapters
+package com.example.hw1.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hw1.data.Joke
+import com.example.hw1.data.model.Joke
 import com.example.hw1.databinding.ItemJokeBinding
-import com.example.hw1.ui.holders.JokeViewHolder
-import com.example.hw1.ui.util.JokeDiffUtilCallback
-import com.example.hw1.ui.util.JokeDiffUtilCallback.*
+import com.example.hw1.ui.main.holders.JokeViewHolder
+import com.example.hw1.ui.main.util.JokeDiffUtilCallback
+import com.example.hw1.ui.main.util.JokeDiffUtilCallback.*
 
 class JokeAdapter(
     private val clickListener: (Int) -> Unit,
@@ -44,7 +44,7 @@ class JokeAdapter(
         if (payloads.isEmpty()) {
             holder.bind(jokes[position])
         } else {
-            payloads.forEach() {
+            payloads.forEach {
                 when (it) {
                     is JokeCategoryPayload -> holder.bindCategory(it.category)
                     is JokeQuestionPayload -> holder.bindQuestion(it.question)
@@ -59,7 +59,7 @@ class JokeAdapter(
     private fun handleJokeClick(position: Int) {
         if (position != RecyclerView.NO_POSITION) {
             (jokes[position] as? Joke)?.let {
-                clickListener(position)
+                clickListener(jokes[position].id)
             }
         }
     }

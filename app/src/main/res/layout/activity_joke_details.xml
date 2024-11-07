@@ -5,10 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.JokeDetailsActivity"
+    tools:context=".ui.joke_details.JokeDetailsActivity"
     android:padding="10dp">
 
-    <!-- Контейнер для центровки блока текста -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

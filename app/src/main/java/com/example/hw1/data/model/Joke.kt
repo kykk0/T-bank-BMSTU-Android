@@ -1,4 +1,4 @@
-package com.example.hw1.data
+package com.example.hw1.data.model
 
 data class Joke (
     val id: Int,

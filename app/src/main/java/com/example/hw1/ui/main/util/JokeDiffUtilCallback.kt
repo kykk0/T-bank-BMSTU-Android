@@ -1,7 +1,7 @@
-package com.example.hw1.ui.util
+package com.example.hw1.ui.main.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.hw1.data.Joke
+import com.example.hw1.data.model.Joke
 
 class JokeDiffUtilCallback(
     private val oldList: List<Joke>,
