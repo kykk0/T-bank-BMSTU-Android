@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.hw1.R
 import com.example.hw1.data.model.Joke
 import com.example.hw1.databinding.ActivityJokeDetailsBinding
-import com.example.hw1.ui.main.JokeViewModel
+import com.example.hw1.ui.main.JokeDetailsViewModel
 
 class JokeDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityJokeDetailsBinding
-    private val viewModel: JokeViewModel by viewModels()
+    private val viewModel: JokeDetailsViewModel by viewModels()
 
     private var jokeId: Int = -1
 

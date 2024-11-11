@@ -2,8 +2,8 @@ package com.example.hw1.ui.main
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw1.databinding.ActivityMainBinding
 import com.example.hw1.ui.joke_details.JokeDetailsActivity
@@ -12,7 +12,7 @@ import com.example.hw1.ui.main.adapters.JokeAdapter
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: JokeViewModel
+    private val viewModel: JokeListViewModel by viewModels()
 
     private val jokeAdapter = JokeAdapter {
         startActivity(JokeDetailsActivity.getInstance(this, it))
@@ -27,16 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = jokeAdapter
 
-        initViewModel()
-        viewModel.loadJokes()
-    }
-
-    private fun initViewModel() {
-        val factory = JokesViewModelFactory()
-        viewModel = ViewModelProvider(this, factory)[JokeViewModel::class.java]
-
         viewModel.jokes.observe(this) { jokeAdapter.setNewJokes(it) }
         viewModel.error.observe(this) { showError(it) }
+        viewModel.loadJokes()
     }
 
     private fun showError(it: String?) {

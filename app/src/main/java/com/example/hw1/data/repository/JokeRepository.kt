@@ -3,7 +3,7 @@ package com.example.hw1.data.repository
 import com.example.hw1.data.model.Joke
 
 object JokeRepository {
-    val jokes = listOf(
+    private val jokes = listOf(
         Joke(1, "Пиратство", "Что ищут шепелявые пираты?", "Фундук"),
         Joke(2, "Дуэль", "Как называется дуэль двух каннибалов?", "Поединок"),
         Joke(3, "Язык", "Какой уровень владения английского у террористов?", "С4"),
@@ -27,5 +27,9 @@ object JokeRepository {
 
     fun getJokeList(): List<Joke> {
         return jokes.shuffled()
+    }
+
+    fun findJokeById(jokeId: Int): Joke? {
+        return jokes.find { it.id == jokeId }
     }
 }
