@@ -26,6 +26,6 @@ object JokeRepository {
     )
 
     fun getJokeList(): List<Joke> {
-        return jokes.shuffled()
+        return jokes
     }
 }

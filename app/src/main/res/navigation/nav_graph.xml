@@ -1,0 +1,22 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/jokeListFragment">
+
+    <fragment
+        android:id="@+id/jokeListFragment"
+        android:name="com.example.hw1.ui.main.JokeListFragment"
+        android:label="Joke List">
+        <action
+            android:id="@+id/action_jokeListFragment_to_jokeDetailsFragment"
+            app:destination="@id/jokeDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/jokeDetailsFragment"
+        android:name="com.example.hw1.ui.joke_details.JokeDetailsFragment"
+        android:label="Joke Details">
+        <argument
+            android:name="jokeId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

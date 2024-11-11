@@ -35,9 +35,6 @@ class JokeDetailsActivity : AppCompatActivity() {
                     showError("Joke not found")
                 }
             }
-            viewModel.error.observe(this) { error ->
-                error?.let { showError(it) }
-            }
         }
     }
 
