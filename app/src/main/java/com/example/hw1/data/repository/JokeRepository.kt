@@ -1,6 +1,8 @@
-package com.example.hw1.data
+package com.example.hw1.data.repository
 
-class JokeGenerator {
+import com.example.hw1.data.model.Joke
+
+object JokeRepository {
     private val jokes = listOf(
         Joke(1, "Пиратство", "Что ищут шепелявые пираты?", "Фундук"),
         Joke(2, "Дуэль", "Как называется дуэль двух каннибалов?", "Поединок"),
@@ -23,7 +25,11 @@ class JokeGenerator {
         )
     )
 
-    fun getRandomJokes(): List<Joke> {
+    fun getJokeList(): List<Joke> {
         return jokes.shuffled()
+    }
+
+    fun findJokeById(jokeId: Int): Joke? {
+        return jokes.find { it.id == jokeId }
     }
 }

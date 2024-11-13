@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">hw1</string>
+    <string name="app_name">Joke App</string>
+    <string name="joke_category">Категория: %1$s</string>
+    <string name="joke_question">Вопрос: %1$s</string>
+    <string name="joke_answer">Ответ: %1$s</string>
+
 </resources>
