@@ -10,13 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.hw1.R
 import com.example.hw1.data.model.Joke
 import com.example.hw1.databinding.FragmentJokeDetailsBinding
-import com.example.hw1.ui.main.JokeViewModel
+import com.example.hw1.ui.joke_details.JokeDetailsViewModel
 
 class JokeDetailsFragment : Fragment() {
 
     private var _binding: FragmentJokeDetailsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: JokeViewModel by viewModels()
+    private val viewModel: JokeDetailsViewModel by viewModels()
     private val args: JokeDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(

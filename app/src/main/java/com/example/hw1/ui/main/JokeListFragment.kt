@@ -17,7 +17,7 @@ class JokeListFragment : Fragment() {
 
     private var _binding: FragmentJokeListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: JokeViewModel
+    private lateinit var viewModel: JokeListViewModel
     private val jokeAdapter = JokeAdapter { jokeId ->
         val action = JokeListFragmentDirections.actionJokeListFragmentToJokeDetailsFragment(jokeId)
         findNavController().navigate(action)
@@ -33,7 +33,7 @@ class JokeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[JokeViewModel::class.java]
+        viewModel = ViewModelProvider(this)[JokeListViewModel::class.java]
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = jokeAdapter
 

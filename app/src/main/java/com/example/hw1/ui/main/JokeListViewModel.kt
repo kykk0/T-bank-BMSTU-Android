@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModel
 import com.example.hw1.data.model.Joke
 import com.example.hw1.data.repository.JokeRepository
 
-class JokeViewModel : ViewModel() {
+class JokeListViewModel : ViewModel() {
     private val _jokes = MutableLiveData<List<Joke>>()
     val jokes: LiveData<List<Joke>> = _jokes
 
-    private val _selectedJoke = MutableLiveData<Joke>()
-    val selectedJoke: LiveData<Joke> = _selectedJoke
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
     fun loadJokes() {
-        _jokes.value = JokeRepository.getJokeList()
-    }
-
-    fun selectJokeById(jokeId: Int) {
-        _selectedJoke.value = JokeRepository.jokes.find { it.id == jokeId }
+        try {
+            _jokes.value = JokeRepository.getJokeList()
+        } catch (e: Exception) {
+            _error.value = "Failed to load jokes"
+        }
     }
 }
