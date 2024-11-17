@@ -1,22 +1,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/jokeListFragment">
 
     <fragment
         android:id="@+id/jokeListFragment"
         android:name="com.example.hw1.ui.main.JokeListFragment"
-        android:label="Joke List">
+        android:label="fragment_joke_list"
+        tools:layout="@layout/fragment_joke_list">
         <action
             android:id="@+id/action_jokeListFragment_to_jokeDetailsFragment"
             app:destination="@id/jokeDetailsFragment" />
+        <action
+            android:id="@+id/action_jokeListFragment_to_addJokeFragment"
+            app:destination="@id/addJokeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/jokeDetailsFragment"
         android:name="com.example.hw1.ui.joke_details.JokeDetailsFragment"
-        android:label="Joke Details">
+        android:label="fragment_joke_details"
+        tools:layout="@layout/fragment_joke_details">
         <argument
             android:name="jokeId"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addJokeFragment"
+        android:name="com.example.hw1.ui.add_joke.AddJokeFragment"
+        android:label="Add Joke"
+        tools:layout="@layout/fragment_add_joke">
+        <action
+            android:id="@+id/action_addJokeFragment_to_jokeListFragment"
+            app:destination="@id/jokeListFragment" />
+    </fragment>
+
 </navigation>
