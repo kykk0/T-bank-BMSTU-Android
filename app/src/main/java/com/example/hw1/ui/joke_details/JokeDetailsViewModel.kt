@@ -1,4 +1,4 @@
-package com.example.hw1.ui.main
+package com.example.hw1.ui.joke_details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

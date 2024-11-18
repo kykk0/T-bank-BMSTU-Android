@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.hw1.R
 import com.example.hw1.data.model.Joke
 import com.example.hw1.databinding.ActivityJokeDetailsBinding
-import com.example.hw1.ui.main.JokeDetailsViewModel
 
 class JokeDetailsActivity : AppCompatActivity() {
 
@@ -34,9 +33,6 @@ class JokeDetailsActivity : AppCompatActivity() {
                 } else {
                     showError("Joke not found")
                 }
-            }
-            viewModel.error.observe(this) { error ->
-                error?.let { showError(it) }
             }
         }
     }

@@ -27,7 +27,7 @@ class JokeAdapter(
         val binding = ItemJokeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return JokeViewHolder(binding).apply {
             binding.root.setOnClickListener {
-                handleJokeClick(adapterPosition)
+                clickListener(jokes[adapterPosition].id)
             }
         }
     }
@@ -55,12 +55,4 @@ class JokeAdapter(
     }
 
     override fun getItemCount(): Int = jokes.size
-
-    private fun handleJokeClick(position: Int) {
-        if (position != RecyclerView.NO_POSITION) {
-            (jokes[position] as? Joke)?.let {
-                clickListener(jokes[position].id)
-            }
-        }
-    }
 }
