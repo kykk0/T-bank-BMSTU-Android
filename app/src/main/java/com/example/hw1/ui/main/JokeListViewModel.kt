@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hw1.data.model.Joke
 import com.example.hw1.data.repository.JokeRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class JokeListViewModel : ViewModel() {
@@ -24,7 +23,6 @@ class JokeListViewModel : ViewModel() {
 
         viewModelScope.launch {
             _loading.value = true
-            delay(3000)
             _jokes.value = JokeRepository.getJokeList()
             _loading.value = false
             isDataLoaded = true

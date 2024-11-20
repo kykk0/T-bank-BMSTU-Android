@@ -33,7 +33,9 @@
         tools:layout="@layout/fragment_add_joke">
         <action
             android:id="@+id/action_addJokeFragment_to_jokeListFragment"
-            app:destination="@id/jokeListFragment" />
+            app:destination="@id/jokeListFragment"
+            app:popUpTo="@id/jokeListFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>
