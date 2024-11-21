@@ -1,4 +1,4 @@
-package com.example.hw1.ui.joke_details
+package com.example.hw1.ui.jokedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater

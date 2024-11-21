@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw1.databinding.FragmentJokeListBinding
-import com.example.hw1.ui.main.adapters.JokeAdapter
+import com.example.hw1.ui.main.adapter.JokeAdapter
 
 class JokeListFragment : Fragment() {
 
@@ -31,30 +31,31 @@ class JokeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = jokeAdapter
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = jokeAdapter
-
-        viewModel.jokes.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                binding.tvEmptyMessage.visibility = View.VISIBLE
-                binding.recyclerView.visibility = View.GONE
-            } else {
-                binding.tvEmptyMessage.visibility = View.GONE
-                binding.recyclerView.visibility = View.VISIBLE
-                jokeAdapter.setNewJokes(it)
+            viewModel.jokes.observe(viewLifecycleOwner) {
+                if (it.isEmpty()) {
+                    tvEmptyMessage.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                } else {
+                    tvEmptyMessage.visibility = View.GONE
+                    recyclerView.visibility = View.VISIBLE
+                    jokeAdapter.setNewJokes(it)
+                }
             }
-        }
 
-        viewModel.loading.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
+            viewModel.loading.observe(viewLifecycleOwner) {
+                progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            }
 
-        binding.btnAddJoke.setOnClickListener {
-            val action = JokeListFragmentDirections.actionJokeListFragmentToAddJokeFragment()
-            findNavController().navigate(action)
+            btnAddJoke.setOnClickListener {
+                val action = JokeListFragmentDirections.actionJokeListFragmentToAddJokeFragment()
+                findNavController().navigate(action)
+            }
+            viewModel.loadJokes()
         }
-        viewModel.loadJokes()
     }
 
     override fun onDestroyView() {

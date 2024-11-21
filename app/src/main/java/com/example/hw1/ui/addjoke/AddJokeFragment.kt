@@ -1,4 +1,4 @@
-package com.example.hw1.ui.add_joke
+package com.example.hw1.ui.addjoke
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -27,17 +27,25 @@ class AddJokeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAddJoke.setOnClickListener {
-            val category = binding.etCategory.text.toString()
-            val question = binding.etQuestion.text.toString()
-            val answer = binding.etAnswer.text.toString()
-
-            if (category.isBlank() || question.isBlank() || answer.isBlank()) {
-                Toast.makeText(requireContext(), "Заполните все поля", Toast.LENGTH_SHORT).show()
-            } else {
-                viewModel.addJoke(category, question, answer)
+        viewModel.addJokeResult.observe(viewLifecycleOwner) { result ->
+            if (result == true) {
                 Toast.makeText(requireContext(), "Шутка добавлена", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addJokeFragment_to_jokeListFragment)
+            }
+        }
+
+        with(binding) {
+            btnAddJoke.setOnClickListener {
+                val category = etCategory.text.toString()
+                val question = etQuestion.text.toString()
+                val answer = etAnswer.text.toString()
+
+                if (category.isBlank() || question.isBlank() || answer.isBlank()) {
+                    Toast.makeText(requireContext(), "Заполните все поля", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    viewModel.addJoke(category, question, answer)
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.hw1.ui.main.adapters
+package com.example.hw1.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw1.data.model.Joke
 import com.example.hw1.databinding.ItemJokeBinding
-import com.example.hw1.ui.main.holders.JokeViewHolder
+import com.example.hw1.ui.main.holder.JokeViewHolder
 import com.example.hw1.ui.main.util.JokeDiffUtilCallback
 import com.example.hw1.ui.main.util.JokeDiffUtilCallback.*
 
 class JokeAdapter(
-    private val clickListener: (Int) -> Unit,
+    private val clickListener: (id: Int) -> Unit,
 ) : RecyclerView.Adapter<JokeViewHolder>() {
 
     private var jokes = emptyList<Joke>()
@@ -39,7 +39,7 @@ class JokeAdapter(
     override fun onBindViewHolder(
         holder: JokeViewHolder,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) {
         if (payloads.isEmpty()) {
             holder.bind(jokes[position])

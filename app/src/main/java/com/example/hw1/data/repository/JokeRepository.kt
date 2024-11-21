@@ -27,26 +27,25 @@ object JokeRepository {
     )
 
     suspend fun getJokeList(): List<Joke> {
-        delay(3000)
+        delay(2000)
         return jokes
     }
 
-    fun findJokeById(jokeId: Int): Joke? {
+    suspend fun findJokeById(jokeId: Int): Joke? {
+        delay(500)
         return jokes.find { it.id == jokeId }
     }
 
-    fun addJoke(category: String, question: String, answer: String) {
+    suspend fun addJoke(category: String, question: String, answer: String) {
+        delay(1000)
         val newJoke = Joke(
             id = getMaxJokeId() + 1,
             category = category,
             question = question,
-            answer = answer
+            answer = answer,
         )
         jokes.add(newJoke)
     }
 
-    private fun getMaxJokeId(): Int {
-        return jokes.maxOfOrNull { it.id } ?: 0
-    }
-
+    private fun getMaxJokeId(): Int = jokes.maxOfOrNull { it.id } ?: 0
 }
