@@ -1,10 +1,12 @@
-package com.example.hw1.ui.joke_details
+package com.example.hw1.ui.jokedetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.hw1.data.model.Joke
 import com.example.hw1.data.repository.JokeRepository
+import kotlinx.coroutines.launch
 
 class JokeDetailsViewModel : ViewModel() {
     private val _error = MutableLiveData<String?>()
@@ -14,11 +16,13 @@ class JokeDetailsViewModel : ViewModel() {
     val selectedJoke: LiveData<Joke?> = _selectedJoke
 
     fun selectJokeById(jokeId: Int) {
-        val joke = JokeRepository.findJokeById(jokeId)
-        if (joke != null) {
-            _selectedJoke.value = joke
-        } else {
-            _error.value = "Joke not found"
+        viewModelScope.launch {
+            val joke = JokeRepository.findJokeById(jokeId)
+            if (joke != null) {
+                _selectedJoke.value = joke
+            } else {
+                _error.value = "Joke not found"
+            }
         }
     }
 }

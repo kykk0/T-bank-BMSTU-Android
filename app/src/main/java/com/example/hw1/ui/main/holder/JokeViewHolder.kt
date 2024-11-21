@@ -1,4 +1,4 @@
-package com.example.hw1.ui.main.holders
+package com.example.hw1.ui.main.holder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw1.data.model.Joke

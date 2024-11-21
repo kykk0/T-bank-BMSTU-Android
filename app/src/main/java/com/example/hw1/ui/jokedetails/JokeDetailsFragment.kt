@@ -1,4 +1,4 @@
-package com.example.hw1.ui.joke_details
+package com.example.hw1.ui.jokedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.hw1.R
 import com.example.hw1.data.model.Joke
 import com.example.hw1.databinding.FragmentJokeDetailsBinding
-import com.example.hw1.ui.joke_details.JokeDetailsViewModel
 
 class JokeDetailsFragment : Fragment() {
 
