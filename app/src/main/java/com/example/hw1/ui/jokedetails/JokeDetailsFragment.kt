@@ -39,6 +39,7 @@ class JokeDetailsFragment : Fragment() {
             tvCategory.text = getString(R.string.joke_category, joke.category)
             tvQuestion.text = getString(R.string.joke_question, joke.question)
             tvAnswer.text = getString(R.string.joke_answer, joke.answer)
+            tvSource.text = getString(R.string.joke_source, joke.source)
         }
     }
 

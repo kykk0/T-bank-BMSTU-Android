@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/jokeListFragment"
-        android:name="com.example.hw1.ui.main.JokeListFragment"
+        android:name="com.example.hw1.ui.jokelist.JokeListFragment"
         android:label="fragment_joke_list"
         tools:layout="@layout/fragment_joke_list">
         <action

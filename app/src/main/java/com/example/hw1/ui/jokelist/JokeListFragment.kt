@@ -1,4 +1,4 @@
-package com.example.hw1.ui.main
+package com.example.hw1.ui.jokelist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hw1.databinding.FragmentJokeListBinding
 import com.example.hw1.ui.main.adapter.JokeAdapter
 
@@ -35,6 +36,19 @@ class JokeListFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = jokeAdapter
 
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val totalItemCount = layoutManager.itemCount
+                    val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+                    if (!viewModel.loading.value!! && lastVisibleItem >= totalItemCount - 1) {
+                        viewModel.loadNetworkJokes()
+                    }
+                }
+            })
+
             viewModel.jokes.observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
                     tvEmptyMessage.visibility = View.VISIBLE
@@ -54,7 +68,6 @@ class JokeListFragment : Fragment() {
                 val action = JokeListFragmentDirections.actionJokeListFragmentToAddJokeFragment()
                 findNavController().navigate(action)
             }
-            viewModel.loadJokes()
         }
     }
 

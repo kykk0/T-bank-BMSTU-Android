@@ -3,6 +3,7 @@
     <string name="joke_category">Категория: %1$s</string>
     <string name="joke_question">Вопрос: %1$s</string>
     <string name="joke_answer">Ответ: %1$s</string>
+    <string name="joke_source">Источник: %1$s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="category">Категория</string>
     <string name="question">Вопрос</string>
