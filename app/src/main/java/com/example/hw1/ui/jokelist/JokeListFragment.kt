@@ -43,8 +43,8 @@ class JokeListFragment : Fragment() {
                     val totalItemCount = layoutManager.itemCount
                     val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
 
-                    if (!viewModel.loading.value!! && lastVisibleItem >= totalItemCount - 1) {
-                        viewModel.loadNetworkJokes()
+                    if (viewModel.canLoadMore() && lastVisibleItem >= totalItemCount - 1) {
+                        viewModel.loadMoreJokes()
                     }
                 }
             })
@@ -60,7 +60,7 @@ class JokeListFragment : Fragment() {
                 }
             }
 
-            viewModel.loading.observe(viewLifecycleOwner) {
+            viewModel.isLoading.observe(viewLifecycleOwner) {
                 progressBar.visibility = if (it) View.VISIBLE else View.GONE
             }
 

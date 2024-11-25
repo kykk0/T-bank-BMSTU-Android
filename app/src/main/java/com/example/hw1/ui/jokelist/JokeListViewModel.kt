@@ -13,37 +13,31 @@ class JokeListViewModel : ViewModel() {
     private val _jokes = MutableLiveData<List<Joke>>()
     val jokes: LiveData<List<Joke>> = _jokes
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-
-    private var isLoadingMoreJokes = false
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        loadLocalJokes()
-        loadNetworkJokes()
+        loadJokes()
     }
 
-    private fun loadLocalJokes() {
+    private fun loadJokes() {
         viewModelScope.launch {
-            _loading.value = true
-            _jokes.value = JokeRepository.getLocalJokes()
-            _loading.value = false
+            _isLoading.value = true
+            _jokes.value = JokeRepository.getJokes(loadMore = false)
+            _isLoading.value = false
         }
     }
 
-    fun loadNetworkJokes() {
-        if (isLoadingMoreJokes) return
-
+    fun loadMoreJokes() {
+        if (!canLoadMore()) return
         viewModelScope.launch {
-            isLoadingMoreJokes = true
-            _loading.value = true
-
-            val currentJokes = _jokes.value.orEmpty()
-            val newJokes = JokeRepository.getNetworkJokes()
-            _jokes.value = currentJokes + newJokes
-
-            _loading.value = false
-            isLoadingMoreJokes = false
+            _isLoading.value = true
+            _jokes.value = JokeRepository.getJokes(loadMore = true)
+            _isLoading.value = false
         }
+    }
+
+    fun canLoadMore(): Boolean {
+        return isLoading.value == false
     }
 }

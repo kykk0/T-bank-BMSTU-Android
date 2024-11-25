@@ -11,4 +11,7 @@
     <string name="add">Добавить шутку</string>
     <string name="out_of_chat">Шутки вышли из чата, добавьте новую!</string>
 
+    <string name="source_local">Локальный</string>
+    <string name="source_network">Из Сети</string>
+
 </resources>

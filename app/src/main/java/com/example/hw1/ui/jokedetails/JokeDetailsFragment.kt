@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hw1.R
 import com.example.hw1.data.model.Joke
+import com.example.hw1.data.model.JokeSource
 import com.example.hw1.databinding.FragmentJokeDetailsBinding
 
 class JokeDetailsFragment : Fragment() {
@@ -39,9 +40,17 @@ class JokeDetailsFragment : Fragment() {
             tvCategory.text = getString(R.string.joke_category, joke.category)
             tvQuestion.text = getString(R.string.joke_question, joke.question)
             tvAnswer.text = getString(R.string.joke_answer, joke.answer)
-            tvSource.text = getString(R.string.joke_source, joke.source)
+            tvSource.text = getString(R.string.joke_source, getLocalizedSource(joke.source))
         }
     }
+
+    private fun getLocalizedSource(source: JokeSource): String {
+        return when (source) {
+            JokeSource.LOCAL -> getString(R.string.source_local)
+            JokeSource.NETWORK -> getString(R.string.source_network)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
