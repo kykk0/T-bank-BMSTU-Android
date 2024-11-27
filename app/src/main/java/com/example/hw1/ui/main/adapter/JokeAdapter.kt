@@ -49,6 +49,7 @@ class JokeAdapter(
                     is JokeCategoryPayload -> holder.bindCategory(it.category)
                     is JokeQuestionPayload -> holder.bindQuestion(it.question)
                     is JokeAnswerPayload -> holder.bindAnswer(it.answer)
+                    is JokeSourcePayload -> holder.bindSource(it.source)
                 }
             }
         }
