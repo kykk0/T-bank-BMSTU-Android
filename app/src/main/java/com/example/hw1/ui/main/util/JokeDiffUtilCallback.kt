@@ -2,6 +2,7 @@ package com.example.hw1.ui.main.util
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.hw1.data.model.Joke
+import com.example.hw1.data.model.JokeSource
 
 class JokeDiffUtilCallback(
     private val oldList: List<Joke>,
@@ -34,12 +35,15 @@ class JokeDiffUtilCallback(
         if (oldItem.answer != newItem.answer) {
             payloads.add(JokeAnswerPayload(newItem.answer))
         }
+        if (oldItem.source != newItem.source) {
+            payloads.add(JokeSourcePayload(newItem.source))
+        }
 
         return if (payloads.isEmpty()) null else payloads
     }
 
-
     data class JokeCategoryPayload(val category: String)
     data class JokeQuestionPayload(val question: String)
     data class JokeAnswerPayload(val answer: String)
+    data class JokeSourcePayload(val source: JokeSource)
 }

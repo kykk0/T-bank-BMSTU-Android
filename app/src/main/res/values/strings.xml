@@ -3,11 +3,15 @@
     <string name="joke_category">Категория: %1$s</string>
     <string name="joke_question">Вопрос: %1$s</string>
     <string name="joke_answer">Ответ: %1$s</string>
+    <string name="joke_source">Источник: %1$s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="category">Категория</string>
     <string name="question">Вопрос</string>
     <string name="answer">Ответ</string>
     <string name="add">Добавить шутку</string>
     <string name="out_of_chat">Шутки вышли из чата, добавьте новую!</string>
+
+    <string name="source_local">Локальный</string>
+    <string name="source_network">Из Сети</string>
 
 </resources>
