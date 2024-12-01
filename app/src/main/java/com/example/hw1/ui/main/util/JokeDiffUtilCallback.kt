@@ -36,7 +36,7 @@ class JokeDiffUtilCallback(
             payloads.add(JokeAnswerPayload(newItem.answer))
         }
         if (oldItem.source != newItem.source) {
-            payloads.add(JokeSourcePayload(newItem.source))
+            payloads.add(JokeSourcePayload(newItem.source.localizedName))
         }
 
         return if (payloads.isEmpty()) null else payloads
@@ -45,5 +45,5 @@ class JokeDiffUtilCallback(
     data class JokeCategoryPayload(val category: String)
     data class JokeQuestionPayload(val question: String)
     data class JokeAnswerPayload(val answer: String)
-    data class JokeSourcePayload(val source: JokeSource)
+    data class JokeSourcePayload(val source: String)
 }

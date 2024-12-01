@@ -2,7 +2,6 @@ package com.example.hw1.ui.main.holder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw1.data.model.Joke
-import com.example.hw1.data.model.JokeSource
 import com.example.hw1.databinding.ItemJokeBinding
 
 class JokeViewHolder(private val binding: ItemJokeBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -11,7 +10,7 @@ class JokeViewHolder(private val binding: ItemJokeBinding) : RecyclerView.ViewHo
         bindCategory(joke.category)
         bindQuestion(joke.question)
         bindAnswer(joke.answer)
-        bindSource(joke.source)
+        bindSource(joke.source.localizedName)
     }
 
     fun bindCategory(category: String){
@@ -26,11 +25,7 @@ class JokeViewHolder(private val binding: ItemJokeBinding) : RecyclerView.ViewHo
         binding.tvAnswer.text = answer
     }
 
-    fun bindSource(source: JokeSource){
-        val sourceLabel = when (source) {
-            JokeSource.NETWORK -> "Из сети"
-            JokeSource.LOCAL -> "Локальный"
-        }
-        binding.tvSource.text = sourceLabel
+    fun bindSource(source: String){
+        binding.tvSource.text = source
     }
 }
