@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,12 +52,19 @@ class JokeListFragment : Fragment() {
 
             viewModel.jokes.observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
-                    tvEmptyMessage.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        "Можете добавить свою шутку",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    tvEmptyMessage.visibility = View.GONE
-                    recyclerView.visibility = View.VISIBLE
                     jokeAdapter.setNewJokes(it)
+                }
+            }
+
+            viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+                if (message.isNotEmpty()) {
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
 
