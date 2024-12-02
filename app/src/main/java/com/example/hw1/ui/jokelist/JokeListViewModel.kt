@@ -31,18 +31,17 @@ class JokeListViewModel : ViewModel() {
     private fun loadInitialJokes() {
         viewModelScope.launch {
             _isLoading.value = true
+            val localJokes = repository.initialize()
+            _jokes.value = localJokes
             try {
-                val localJokes = repository.initialize()
-                _jokes.value = localJokes
-
                 val newJokes = repository.loadMoreJokes()
                 _jokes.value = localJokes + newJokes
             } catch (e: Exception) {
                 val cachedJokes = repository.loadCachedJokes()
-                if(cachedJokes.isEmpty()){
+                if (cachedJokes.isEmpty()) {
                     _errorMessage.value = "Проблемы с интернетом, попробуйте позже"
                 } else {
-                    _jokes.value = cachedJokes
+                    _jokes.value = localJokes + cachedJokes
                 }
             } finally {
                 _isLoading.value = false
@@ -51,7 +50,6 @@ class JokeListViewModel : ViewModel() {
     }
 
     fun loadMoreJokes() {
-        if (!canLoadMore()) return
         viewModelScope.launch {
             _isLoading.value = true
             try {
