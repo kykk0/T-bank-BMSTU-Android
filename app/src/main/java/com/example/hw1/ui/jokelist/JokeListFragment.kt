@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hw1.R
 import com.example.hw1.databinding.FragmentJokeListBinding
 import com.example.hw1.ui.main.adapter.JokeAdapter
 
@@ -19,10 +20,7 @@ class JokeListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: JokeListViewModel by viewModels()
 
-    private val jokeAdapter = JokeAdapter { jokeId ->
-        val action = JokeListFragmentDirections.actionJokeListFragmentToJokeDetailsFragment(jokeId)
-        findNavController().navigate(action)
-    }
+    private lateinit var jokeAdapter: JokeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -33,6 +31,12 @@ class JokeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        jokeAdapter = JokeAdapter( { jokeId ->
+            val action = JokeListFragmentDirections.actionJokeListFragmentToJokeDetailsFragment(jokeId)
+            findNavController().navigate(action)
+        }, requireContext())
+
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = jokeAdapter
@@ -54,7 +58,7 @@ class JokeListFragment : Fragment() {
                 if (it.isEmpty()) {
                     Toast.makeText(
                         requireContext(),
-                        "Можете добавить свою шутку",
+                        R.string.can_add_new_joke,
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
@@ -62,9 +66,14 @@ class JokeListFragment : Fragment() {
                 }
             }
 
-            viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-                if (message.isNotEmpty()) {
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            viewModel.errorMessage.observe(viewLifecycleOwner) { messageKey ->
+                when (messageKey) {
+                    "ERROR_INTERNET" -> {
+                        Toast.makeText(requireContext(), R.string.error_internet, Toast.LENGTH_SHORT).show()
+                    }
+                    "ERROR_LOADING_JOKES" ->{
+                        Toast.makeText(requireContext(), R.string.error_loading_jokes, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 

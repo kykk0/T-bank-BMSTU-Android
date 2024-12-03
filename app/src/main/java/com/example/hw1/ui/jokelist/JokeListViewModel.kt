@@ -39,7 +39,7 @@ class JokeListViewModel : ViewModel() {
             } catch (e: Exception) {
                 val cachedJokes = repository.loadCachedJokes()
                 if (cachedJokes.isEmpty()) {
-                    _errorMessage.value = "Проблемы с интернетом, попробуйте позже"
+                    _errorMessage.value = "ERROR_INTERNET"
                 } else {
                     _jokes.value = localJokes + cachedJokes
                 }
@@ -60,7 +60,7 @@ class JokeListViewModel : ViewModel() {
                 val localJokes = repository.getLocalJokes()
                 val cachedJokes = repository.loadCachedJokes()
                 _jokes.value = localJokes + cachedJokes
-                _errorMessage.value = "Ошибка при загрузке шуток из сети. Вот старые шутки:)"
+                _errorMessage.value = "ERROR_LOADING_JOKES"
             } finally {
                 _isLoading.value = false
             }

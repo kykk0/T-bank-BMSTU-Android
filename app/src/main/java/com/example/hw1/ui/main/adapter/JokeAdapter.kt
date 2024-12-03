@@ -1,5 +1,6 @@
 package com.example.hw1.ui.main.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,6 +13,7 @@ import com.example.hw1.ui.main.util.JokeDiffUtilCallback.*
 
 class JokeAdapter(
     private val clickListener: (id: Int) -> Unit,
+    private val context: Context
 ) : RecyclerView.Adapter<JokeViewHolder>() {
 
     private var jokes = emptyList<Joke>()
@@ -33,7 +35,7 @@ class JokeAdapter(
     }
 
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
-        holder.bind(jokes[position])
+        holder.bind(jokes[position], context)
     }
 
     override fun onBindViewHolder(
@@ -42,14 +44,14 @@ class JokeAdapter(
         payloads: MutableList<Any>,
     ) {
         if (payloads.isEmpty()) {
-            holder.bind(jokes[position])
+            holder.bind(jokes[position], context)
         } else {
             payloads.forEach {
                 when (it) {
                     is JokeCategoryPayload -> holder.bindCategory(it.category)
                     is JokeQuestionPayload -> holder.bindQuestion(it.question)
                     is JokeAnswerPayload -> holder.bindAnswer(it.answer)
-                    is JokeSourcePayload -> holder.bindSource(it.source)
+                    is JokeSourcePayload -> holder.bindSource(it.source, context)
                 }
             }
         }

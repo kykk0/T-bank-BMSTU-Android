@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 @Entity(tableName = "local_jokes")
 data class LocalJoke(
     @SerialName("id")
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int,
 
     @SerialName("category")
     val category: String,

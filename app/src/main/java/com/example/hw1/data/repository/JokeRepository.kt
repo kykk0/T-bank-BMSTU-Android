@@ -30,7 +30,7 @@ class JokeRepository(private val jokeDao: JokeDao) {
                 category = it.category,
                 question = it.question,
                 answer = it.answer,
-                source = JokeSource.NETWORK.localizedName,
+                source = JokeSource.NETWORK.toString(),
                 timestamp = System.currentTimeMillis()
             )
         }
@@ -39,7 +39,7 @@ class JokeRepository(private val jokeDao: JokeDao) {
 
     private suspend fun saveJokesToCache(jokes: List<CachedJoke>) {
         jokes.forEach { joke ->
-            jokeDao.insertCachedJoke(joke.copy(source = JokeSource.CACHED.localizedName))
+            jokeDao.insertCachedJoke(joke.copy(source = JokeSource.CACHED.toString()))
         }
     }
 
@@ -62,10 +62,11 @@ class JokeRepository(private val jokeDao: JokeDao) {
 
     suspend fun addLocalJoke(category: String, question: String, answer: String) {
         val localJoke = LocalJoke(
+            id = 0,
             category = category,
             question = question,
             answer = answer,
-            source = JokeSource.LOCAL.localizedName
+            source = JokeSource.LOCAL.toString()
         )
         jokeDao.insertLocalJoke(localJoke)
     }
@@ -74,12 +75,8 @@ class JokeRepository(private val jokeDao: JokeDao) {
         val localJoke = jokeDao.getLocalJokeById(jokeId)
         val cachedJoke = jokeDao.getCachedJokeById(jokeId)
 
-        return if (localJoke != null)
-            JokeMapper.mapToJokeFromLoc(localJoke)
-        else if (cachedJoke != null)
-            JokeMapper.mapToJokeFromCache(cachedJoke)
-        else
-            null
+        return localJoke?.let { JokeMapper.mapToJokeFromLoc(it) }
+            ?: cachedJoke?.let { JokeMapper.mapToJokeFromCache(it) }
     }
 
     suspend fun initialize(): List<Joke> {
