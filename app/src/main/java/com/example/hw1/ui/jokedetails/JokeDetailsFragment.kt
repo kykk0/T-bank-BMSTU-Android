@@ -1,6 +1,5 @@
 package com.example.hw1.ui.jokedetails
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hw1.R
 import com.example.hw1.data.model.Joke
-import com.example.hw1.data.model.JokeSource
+import com.example.hw1.data.model.displayName
 import com.example.hw1.databinding.FragmentJokeDetailsBinding
 
 class JokeDetailsFragment : Fragment() {
@@ -41,16 +40,7 @@ class JokeDetailsFragment : Fragment() {
             tvCategory.text = getString(R.string.joke_category, joke.category)
             tvQuestion.text = getString(R.string.joke_question, joke.question)
             tvAnswer.text = getString(R.string.joke_answer, joke.answer)
-            tvSource.text =
-                getString(R.string.joke_source, getLocalizeSource(joke.source, requireContext()))
-        }
-    }
-
-    private fun getLocalizeSource(source: JokeSource, context: Context): String {
-        return when (source) {
-            JokeSource.LOCAL -> context.getString(R.string.source_local)
-            JokeSource.NETWORK -> context.getString(R.string.source_network)
-            JokeSource.CACHED -> context.getString(R.string.source_cache)
+            tvSource.text = getString(R.string.joke_source, getString(joke.source.displayName))
         }
     }
 

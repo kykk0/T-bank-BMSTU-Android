@@ -2,9 +2,9 @@ package com.example.hw1.ui.main.holder
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hw1.R
 import com.example.hw1.data.model.Joke
 import com.example.hw1.data.model.JokeSource
+import com.example.hw1.data.model.displayName
 import com.example.hw1.databinding.ItemJokeBinding
 
 class JokeViewHolder(private val binding: ItemJokeBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -16,27 +16,19 @@ class JokeViewHolder(private val binding: ItemJokeBinding) : RecyclerView.ViewHo
         bindSource(joke.source, context)
     }
 
-    fun bindCategory(category: String){
+    fun bindCategory(category: String) {
         binding.tvCategory.text = category
     }
 
-    fun bindQuestion(question: String){
+    fun bindQuestion(question: String) {
         binding.tvQuestion.text = question
     }
 
-    fun bindAnswer(answer: String){
+    fun bindAnswer(answer: String) {
         binding.tvAnswer.text = answer
     }
 
     fun bindSource(source: JokeSource, context: Context) {
-        binding.tvSource.text = getLocalizeSource(source, context)
-    }
-
-    private fun getLocalizeSource(source: JokeSource, context: Context): String {
-        return when (source) {
-            JokeSource.LOCAL -> context.getString(R.string.source_local)
-            JokeSource.NETWORK -> context.getString(R.string.source_network)
-            JokeSource.CACHED -> context.getString(R.string.source_cache)
-        }
+        binding.tvSource.text = context.getString(source.displayName)
     }
 }
