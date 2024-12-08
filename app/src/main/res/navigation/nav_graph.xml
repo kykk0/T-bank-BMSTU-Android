@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/jokeListFragment"
-        android:name="com.example.hw1.ui.jokelist.JokeListFragment"
+        android:name="com.example.hw1.presentation.ui.jokelist.JokeListFragment"
         android:label="fragment_joke_list"
         tools:layout="@layout/fragment_joke_list">
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/jokeDetailsFragment"
-        android:name="com.example.hw1.ui.jokedetails.JokeDetailsFragment"
+        android:name="com.example.hw1.presentation.ui.jokedetails.JokeDetailsFragment"
         android:label="fragment_joke_details"
         tools:layout="@layout/fragment_joke_details">
         <argument
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/addJokeFragment"
-        android:name="com.example.hw1.ui.addjoke.AddJokeFragment"
+        android:name="com.example.hw1.presentation.ui.addjoke.AddJokeFragment"
         android:label="Add Joke"
         tools:layout="@layout/fragment_add_joke">
         <action
