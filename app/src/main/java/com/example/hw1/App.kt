@@ -1,4 +1,4 @@
-package com.example.hw1.presentation
+package com.example.hw1
 
 import android.app.Application
 import com.example.hw1.data.datasource.local.JokeDatabase
