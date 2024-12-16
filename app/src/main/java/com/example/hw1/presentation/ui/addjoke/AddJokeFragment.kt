@@ -22,7 +22,7 @@ class AddJokeFragment : Fragment() {
 
     private val jokeRepository = JokeRepositoryImpl(
         jokeDao = JokeDatabase.INSTANCE.jokeDao(),
-        jokeMapper = JokeMapper
+        jokeMapper = JokeMapper()
     )
     private val viewModel: AddJokeViewModel by viewModels {
         AddJokeViewModelFactory(AddLocalJokeUseCase(jokeRepository))

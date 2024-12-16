@@ -8,8 +8,9 @@ import com.example.hw1.domain.entity.Joke
 import com.example.hw1.data.entity.JokeSource
 import com.example.hw1.data.datasource.remote.RetrofitInstance
 import com.example.hw1.domain.repository.JokeRepository
+import javax.inject.Inject
 
-class JokeRepositoryImpl(
+class JokeRepositoryImpl @Inject constructor(
     private val jokeDao: JokeDao,
     private val jokeMapper: JokeMapper,
 ) :

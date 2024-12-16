@@ -22,7 +22,7 @@ class JokeDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val jokeRepository = JokeRepositoryImpl(
         jokeDao = JokeDatabase.INSTANCE.jokeDao(),
-        jokeMapper = JokeMapper
+        jokeMapper = JokeMapper()
     )
 
     private val viewModel: JokeDetailsViewModel by viewModels {

@@ -6,8 +6,9 @@ import com.example.hw1.domain.usecase.GetLocalJokesUseCase
 import com.example.hw1.domain.usecase.LoadCachedJokesUseCase
 import com.example.hw1.domain.usecase.LoadMoreJokesUseCase
 import com.example.hw1.domain.usecase.InitializeUseCase
+import javax.inject.Inject
 
-class JokeListViewModelFactory(
+class JokeListViewModelFactory @Inject constructor(
     private val getLocalJokesUseCase: GetLocalJokesUseCase,
     private val loadMoreJokesUseCase: LoadMoreJokesUseCase,
     private val loadCachedJokesUseCase: LoadCachedJokesUseCase,
