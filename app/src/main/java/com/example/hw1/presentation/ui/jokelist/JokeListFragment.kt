@@ -28,7 +28,7 @@ class JokeListFragment : Fragment() {
 
     private val jokeRepository = JokeRepositoryImpl(
         jokeDao = JokeDatabase.INSTANCE.jokeDao(),
-        jokeMapper = JokeMapper
+        jokeMapper = JokeMapper()
     )
 
     private val viewModel: JokeListViewModel by viewModels {

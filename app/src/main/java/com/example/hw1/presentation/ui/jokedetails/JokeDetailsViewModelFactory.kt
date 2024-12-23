@@ -3,8 +3,9 @@ package com.example.hw1.presentation.ui.jokedetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.hw1.domain.usecase.FindJokeByIdUseCase
+import javax.inject.Inject
 
-class JokeDetailsViewModelFactory(
+class JokeDetailsViewModelFactory @Inject constructor(
     private val findJokeByIdUseCase: FindJokeByIdUseCase
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

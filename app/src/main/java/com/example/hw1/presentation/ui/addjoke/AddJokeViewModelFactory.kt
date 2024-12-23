@@ -3,8 +3,9 @@ package com.example.hw1.presentation.ui.addjoke
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.hw1.domain.usecase.AddLocalJokeUseCase
+import javax.inject.Inject
 
-class AddJokeViewModelFactory(
+class AddJokeViewModelFactory @Inject constructor(
     private val addLocalJokeUseCase: AddLocalJokeUseCase
 ) : ViewModelProvider.Factory {
 

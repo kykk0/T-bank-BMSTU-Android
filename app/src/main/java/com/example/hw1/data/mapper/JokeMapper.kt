@@ -4,36 +4,43 @@ import com.example.hw1.data.entity.LocalJoke
 import com.example.hw1.data.entity.CachedJoke
 import com.example.hw1.domain.entity.Joke
 import com.example.hw1.data.entity.JokeSource
+import javax.inject.Inject
 
-object JokeMapper {
+class JokeMapper @Inject constructor() {
 
     fun mapToJokeFromLoc(localJoke: LocalJoke): Joke {
-        return Joke(
-            id = localJoke.id,
-            category = localJoke.category,
-            question = localJoke.question,
-            answer = localJoke.answer,
-            source = JokeSource.LOCAL
-        )
+        return with(localJoke) {
+            Joke(
+                id = id,
+                category = category,
+                question = question,
+                answer = answer,
+                source = JokeSource.LOCAL
+            )
+        }
     }
 
     fun mapToJokeFromNet(cachedJoke: CachedJoke): Joke {
-        return Joke(
-            id = cachedJoke.id,
-            category = cachedJoke.category,
-            question = cachedJoke.question,
-            answer = cachedJoke.answer,
-            source = JokeSource.NETWORK
-        )
+        return with(cachedJoke) {
+            Joke(
+                id = id,
+                category = category,
+                question = question,
+                answer = answer,
+                source = JokeSource.NETWORK
+            )
+        }
     }
 
     fun mapToJokeFromCache(cachedJoke: CachedJoke): Joke {
-        return Joke(
-            id = cachedJoke.id,
-            category = cachedJoke.category,
-            question = cachedJoke.question,
-            answer = cachedJoke.answer,
-            source = JokeSource.CACHED
-        )
+        return with(cachedJoke) {
+            Joke(
+                id = id,
+                category = category,
+                question = question,
+                answer = answer,
+                source = JokeSource.CACHED
+            )
+        }
     }
 }
